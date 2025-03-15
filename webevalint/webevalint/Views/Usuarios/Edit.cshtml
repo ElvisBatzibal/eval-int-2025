@@ -1,0 +1,61 @@
+@model webevalint.Schema.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h1 class="my-4">Editar Usuario</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4>Información del Usuario</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="UsuarioId" />
+                    <div class="form-group mb-3">
+                        <label asp-for="Usuario1" class="form-label">Usuario</label>
+                        <input asp-for="Usuario1" class="form-control" />
+                        <span asp-validation-for="Usuario1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Email" class="form-label">Correo Electrónico</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Password" class="form-label">Credenciales</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Estado" class="form-label">Estado</label>
+                        <input asp-for="Estado" class="form-control" />
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="RolId" class="form-label">Seleccionar Rol</label>
+                        <select asp-for="RolId" class="form-control" asp-items="ViewBag.RolId"></select>
+                        <span asp-validation-for="RolId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="EmpleadoId" class="form-label">Seleccionar Empleado</label>
+                        <select asp-for="EmpleadoId" class="form-control" asp-items="ViewBag.EmpleadoId"></select>
+                        <span asp-validation-for="EmpleadoId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-end">
+                        <input type="submit" value="Confirmar Cambios" class="btn btn-primary" />
+                        <a class="btn btn-secondary ms-2" asp-action="Index">Volver al listado de usuarios</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

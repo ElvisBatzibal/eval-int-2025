@@ -1,0 +1,12 @@
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@{
+    Layout = "_LayoutLogin";
+}
+@{
+    ViewData["Title"] = "Acceso Denegado";
+}
+
+<h2>Acceso Denegado</h2>
+<p>No tienes permisos para acceder a esta página.</p>
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">Regresar</a>

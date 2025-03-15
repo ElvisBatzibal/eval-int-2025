@@ -1,0 +1,65 @@
+@model IEnumerable<webevalint.Schema.Usuario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="my-4">Listado general de usuarios</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Agregar Usuario</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Usuario
+            </th>
+            <th>
+               Correo Electronico
+            </th>
+            <th>
+                Credenciales
+            </th>
+            <th>
+               Estado
+            </th>
+            <th>
+               Empleado
+            </th>
+            <th>
+              Rol
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol.Nombre)
+            </td>
+            <td>
+                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.UsuarioId">Editar</a>
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.UsuarioId">Detalle</a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.UsuarioId">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

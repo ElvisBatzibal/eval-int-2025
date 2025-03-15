@@ -1,0 +1,62 @@
+@model webevalint.Schema.Usuario
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<h1 class="my-4">Eliminar Usuario</h1>
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h4>Confirmación de Eliminación</h4>
+    </div>
+    <div class="card-body">
+        <h5 class="text-danger">¿Estás seguro de que deseas eliminar este usuario?</h5>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                Usuario
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Usuario1)
+            </dd>
+            <dt class="col-sm-3">
+                Correo Electrónico
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-3">
+                Credenciales
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+            <dt class="col-sm-3">
+                Estado
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Estado)
+            </dd>
+            <dt class="col-sm-3">
+                Empleado
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Empleado.Nombre)
+            </dd>
+            <dt class="col-sm-3">
+                Rol
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Rol.Nombre)
+            </dd>
+        </dl>
+    </div>
+    <div class="card-footer text-end">
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="UsuarioId" />
+            <input type="submit" value="Confirmar Eliminar" class="btn btn-danger" />
+        </form>
+        <a class="btn btn-secondary" asp-action="Index">Volver al listado de usuarios</a>
+    </div>
+</div>

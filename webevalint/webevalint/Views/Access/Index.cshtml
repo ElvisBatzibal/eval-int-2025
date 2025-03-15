@@ -1,0 +1,103 @@
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@{
+    Layout = "_LayoutLogin";
+}
+
+<style>
+
+    body {
+        background-image: url('./img/loginfondo.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+
+    <div class="container" data-layout="container">
+       
+            <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <a class="d-flex flex-center mb-4" href="@Url.Action("Index","Access")">
+                    <img class="me-2" src="~/img/login.png" alt="" width="100" />
+                    <span class="font-sans-serif fw-bolder fs-5 d-inline-block"></span>
+                </a>
+                <div class="card">
+                    <div class="card-body p-4 p-sm-5">
+                        <div class="row flex-between-center mb-2">
+                            <div class="col-auto">
+                                <h5>Inicio de Sesión</h5>
+                            </div>
+                        </div>
+                        <form id="FormLogin">
+                            <input type="hidden" name="returnUrl" value="@Context.Request.Query["ReturnUrl"]" />
+
+                            <div class="mb-3">
+                                <label for="accessname" class="form-label">Usuario o Correo Electrónico</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                    <input class="form-control" name="accessname" type="text" placeholder="Usuario o Correo Electrónico" required />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="credential" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input id="passwordField" class="form-control" name="credential" type="password" placeholder="Contraseña" required />
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button id="btnSubmit" class="btn btn-primary d-block w-100 mt-3" type="button" name="submit">Iniciar Sesión</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+       
+    </div>
+
+
+<script>document.getElementById("togglePassword").addEventListener("click", function () {
+        let passwordField = document.getElementById("passwordField");
+        let icon = this.querySelector("i");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    });
+    
+
+    document.getElementById("btnSubmit").addEventListener("click", function () {
+        let UserName = document.querySelector("input[name='accessname']").value;
+        let Password = document.querySelector("input[name='credential']").value;
+        fetch("/Access/LoginRequest", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ userName: UserName, password: Password })
+        }).then(response => response.json())
+            .then(data => {
+                if (data.result) {
+                    window.location.href = data.url;
+                } else {
+                    alert(data.message);
+                }
+            });
+    });
+
+ 
+    
+    
+    </script>
